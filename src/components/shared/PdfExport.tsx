@@ -105,7 +105,7 @@ const PdfExport = ({ children }: { children?: React.ReactNode }) => {
 
     try {
       setIsPrinting(true);
-      const pagePadding = globalSettings?.pagePadding || 0;
+      const pagePadding = globalSettings?.pagePadding ?? 32;
       await exportResumeToBrowserPrint(
         resumeContent,
         pagePadding,
