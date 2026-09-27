@@ -6,14 +6,10 @@ import {
   Home,
   Copy,
   Download,
-  Printer,
-  FileJson,
-  Loader2,
   Eye,
   FileText,
   EyeOff
 } from "lucide-react";
-import { RiMarkdownLine } from "@remixicon/react";
 import { toast } from "sonner";
 import { motion } from "framer-motion";
 import { useTranslations } from "@/i18n/compat/client";
@@ -27,7 +23,7 @@ import {
   TooltipTrigger
 } from "@/components/ui/tooltip";
 import TemplateSheet from "@/components/shared/TemplateSheet";
-import { GITHUB_REPO_URL, PDF_EXPORT_CONFIG } from "@/config";
+import { GITHUB_REPO_URL } from "@/config";
 import { cn } from "@/lib/utils";
 import { useResumeStore } from "@/store/useResumeStore";
 import { FAQDialog } from "./FAQDialog";

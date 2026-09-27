@@ -5,38 +5,6 @@ export interface GlassIconProps {
   isLoading?: boolean;
 }
 
-export const PdfGlassIcon = ({ className, isLoading }: GlassIconProps) => (
-  <svg viewBox="0 0 100 100" fill="none" className={className}>
-    <defs>
-      <filter id="pdf-glow"><feGaussianBlur stdDeviation="8" /></filter>
-      <linearGradient id="pdf-glass" x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0%" stopColor="#ffffff" stopOpacity="0.7" />
-        <stop offset="100%" stopColor="#ffffff" stopOpacity="0.1" />
-      </linearGradient>
-      <linearGradient id="pdf-border" x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0%" stopColor="#ffffff" stopOpacity="0.9" />
-        <stop offset="100%" stopColor="#ffffff" stopOpacity="0.2" />
-      </linearGradient>
-    </defs>
-    {/* Shadow blob */}
-    <rect x="25" y="25" width="45" height="55" rx="8" fill="#f43f5e" filter="url(#pdf-glow)" opacity="0.75" />
-    {/* Solid base */}
-    <rect x="25" y="25" width="45" height="55" rx="8" fill="#e11d48" />
-    {/* Glass plate overlay */}
-    <rect x="15" y="15" width="55" height="65" rx="10" fill="url(#pdf-glass)" stroke="url(#pdf-border)" strokeWidth="1.5" />
-    {/* PDF marking */}
-    <text x="42.5" y="48" fill="#ffffff" fontSize="16" fontWeight="900" fontFamily="sans-serif" textAnchor="middle" opacity="0.95" style={{letterSpacing: "2px"}}>PDF</text>
-    {/* Decorative folded corner */}
-    <path d="M70 15 L70 30 C70 33 67 36 64 36 L49 36" stroke="url(#pdf-border)" strokeWidth="1.5" strokeLinecap="round" fill="none" opacity="0.6" />
-    <rect x="30" y="60" width={isLoading ? "0" : "25"} height="4" rx="2" fill="#ffffff" opacity={isLoading ? "1" : "0.8"}>
-      {isLoading && <animate attributeName="width" values="5;30;5" dur="1.2s" repeatCount="indefinite" />}
-    </rect>
-    <rect x="30" y="68" width={isLoading ? "15" : "15"} height="4" rx="2" fill="#ffffff" opacity={isLoading ? "1" : "0.5"}>
-      {isLoading && <animate attributeName="width" values="20;5;20" dur="1.2s" repeatCount="indefinite" />}
-    </rect>
-  </svg>
-);
-
 export const PrintGlassIcon = ({ className, isLoading }: GlassIconProps) => (
   <svg viewBox="0 0 100 100" fill="none" className={className}>
     <defs>
@@ -92,52 +60,5 @@ export const JsonGlassIcon = ({ className, isLoading }: GlassIconProps) => (
       {isLoading && <animate attributeName="opacity" values="0.2;1;0.2" dur="1.5s" repeatCount="indefinite" />}
     </text>
     <text x="42.5" y="64" fill="#ffffff" fontSize="10" fontWeight="bold" fontFamily="sans-serif" textAnchor="middle" opacity="0.9">JSON</text>
-  </svg>
-);
-
-export const MarkdownGlassIcon = ({ className, isLoading }: GlassIconProps) => (
-  <svg viewBox="0 0 100 100" fill="none" className={className}>
-    <defs>
-      <filter id="md-glow"><feGaussianBlur stdDeviation="9" /></filter>
-      <linearGradient id="md-glass" x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0%" stopColor="#ffffff" stopOpacity="0.5" />
-        <stop offset="100%" stopColor="#ffffff" stopOpacity="0.05" />
-      </linearGradient>
-      <linearGradient id="md-border" x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0%" stopColor="#ffffff" stopOpacity="0.8" />
-        <stop offset="100%" stopColor="#ffffff" stopOpacity="0.1" />
-      </linearGradient>
-    </defs>
-    <rect x="15" y="25" width="60" height="40" rx="8" fill="#6366f1" filter="url(#md-glow)" opacity="0.75" />
-    <rect x="20" y="30" width="55" height="40" rx="8" fill="#4f46e5" />
-    <rect x="10" y="20" width="65" height="45" rx="8" fill="url(#md-glass)" stroke="url(#md-border)" strokeWidth="1.5" />
-    <path d="M25 35 L25 50 M25 35 L33 43 L41 35 L41 50 M56 35 L56 50 M56 50 L49 43 M56 50 L63 43" stroke="#ffffff" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round">
-      {isLoading && <animate attributeName="stroke-opacity" values="1;0.3;1" dur="1s" repeatCount="indefinite" />}
-    </path>
-  </svg>
-);
-
-export const ImageGlassIcon = ({ className, isLoading }: GlassIconProps) => (
-  <svg viewBox="0 0 100 100" fill="none" className={className}>
-    <defs>
-      <filter id="img-glow"><feGaussianBlur stdDeviation="8" /></filter>
-      <linearGradient id="img-glass" x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0%" stopColor="#ffffff" stopOpacity="0.68" />
-        <stop offset="100%" stopColor="#ffffff" stopOpacity="0.08" />
-      </linearGradient>
-      <linearGradient id="img-border" x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0%" stopColor="#ffffff" stopOpacity="0.9" />
-        <stop offset="100%" stopColor="#ffffff" stopOpacity="0.18" />
-      </linearGradient>
-    </defs>
-    <rect x="20" y="18" width="56" height="64" rx="10" fill="#0f766e" filter="url(#img-glow)" opacity="0.62" />
-    <rect x="18" y="16" width="60" height="68" rx="12" fill="#0f766e" />
-    <rect x="12" y="10" width="68" height="74" rx="14" fill="url(#img-glass)" stroke="url(#img-border)" strokeWidth="1.5" />
-    <circle cx="35" cy="31" r="5" fill="#ffffff" opacity="0.9" />
-    <path d="M22 67 L38 49 L48 59 L59 45 L74 67" stroke="#ffffff" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" opacity="0.95" />
-    <path d="M23 70H75" stroke="#ffffff" strokeWidth="3" strokeLinecap="round" opacity="0.28" />
-    <rect x="26" y="73" width={isLoading ? "18" : "24"} height="4" rx="2" fill="#ffffff" opacity="0.72">
-      {isLoading && <animate attributeName="width" values="14;26;14" dur="1.2s" repeatCount="indefinite" />}
-    </rect>
   </svg>
 );

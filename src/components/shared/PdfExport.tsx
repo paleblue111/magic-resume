@@ -3,13 +3,7 @@ import { useTranslations } from "@/i18n/compat/client";
 import { Download, Loader2, ChevronDown, ShieldCheck } from "lucide-react";
 import { useResumeStore } from "@/store/useResumeStore";
 import { Button } from "@/components/ui/button";
-import {
-  exportResumeAsJson,
-  exportResumeAsMarkdown,
-  exportToLongPageImage,
-  exportToLongPagePdf,
-  exportToPdf
-} from "@/utils/export";
+import { exportResumeAsJson } from "@/utils/export";
 import { exportResumeToBrowserPrint } from "@/utils/print";
 import { cn } from "@/lib/utils";
 import {
@@ -21,14 +15,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 
-import {
-  PdfGlassIcon,
-  ImageGlassIcon,
-  PrintGlassIcon,
-  JsonGlassIcon,
-  MarkdownGlassIcon,
-} from "./GlassIcons";
-
+import { PrintGlassIcon, JsonGlassIcon } from "./GlassIcons";
 
 const ExportCard = ({
   icon: Icon,
@@ -92,55 +79,11 @@ const ExportCard = ({
 
 const PdfExport = ({ children }: { children?: React.ReactNode }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [isExporting, setIsExporting] = useState(false);
-  const [isExportingLongPage, setIsExportingLongPage] = useState(false);
-  const [isExportingImage, setIsExportingImage] = useState(false);
   const [isPrinting, setIsPrinting] = useState(false);
   const [isExportingJson, setIsExportingJson] = useState(false);
-  const [isExportingMarkdown, setIsExportingMarkdown] = useState(false);
   const { activeResume } = useResumeStore();
   const { globalSettings = {}, title } = activeResume || {};
   const t = useTranslations("pdfExport");
-  const tBasicField = useTranslations("workbench.basicPanel.basicFields");
-
-  const handleExport = async () => {
-    await exportToPdf({
-      elementId: "resume-preview",
-      title: title || "resume",
-      pagePadding: globalSettings?.pagePadding || 0,
-      fontFamily: globalSettings?.fontFamily,
-      onStart: () => setIsExporting(true),
-      onEnd: () => setIsExporting(false),
-      successMessage: t("toast.success"),
-      errorMessage: t("toast.error")
-    });
-  };
-
-  const handleLongPageExport = async () => {
-    await exportToLongPagePdf({
-      elementId: "resume-preview",
-      title: title || "resume",
-      pagePadding: globalSettings?.pagePadding || 0,
-      fontFamily: globalSettings?.fontFamily,
-      onStart: () => setIsExportingLongPage(true),
-      onEnd: () => setIsExportingLongPage(false),
-      successMessage: t("toast.success"),
-      errorMessage: t("toast.error")
-    });
-  };
-
-  const handleLongPageImageExport = async () => {
-    await exportToLongPageImage({
-      elementId: "resume-preview",
-      title: title || "resume",
-      pagePadding: globalSettings?.pagePadding || 0,
-      fontFamily: globalSettings?.fontFamily,
-      onStart: () => setIsExportingImage(true),
-      onEnd: () => setIsExportingImage(false),
-      successMessage: t("toast.imageSuccess"),
-      errorMessage: t("toast.imageError")
-    });
-  };
 
   const handleJsonExport = () => {
     exportResumeAsJson({
@@ -150,28 +93,6 @@ const PdfExport = ({ children }: { children?: React.ReactNode }) => {
       onEnd: () => setIsExportingJson(false),
       successMessage: t("toast.jsonSuccess"),
       errorMessage: t("toast.jsonError")
-    });
-  };
-
-  const handleMarkdownExport = () => {
-    exportResumeAsMarkdown({
-      resume: activeResume,
-      title,
-      onStart: () => setIsExportingMarkdown(true),
-      onEnd: () => setIsExportingMarkdown(false),
-      successMessage: t("toast.markdownSuccess"),
-      errorMessage: t("toast.markdownError"),
-      markdownOptions: {
-        basicFieldLabels: {
-          name: tBasicField("name"),
-          title: tBasicField("title"),
-          employementStatus: tBasicField("employementStatus"),
-          birthDate: tBasicField("birthDate"),
-          email: tBasicField("email"),
-          phone: tBasicField("phone"),
-          location: tBasicField("location")
-        }
-      }
     });
   };
 
@@ -195,21 +116,12 @@ const PdfExport = ({ children }: { children?: React.ReactNode }) => {
     }
   };
 
-  const isLoading =
-    isExporting ||
-    isExportingLongPage ||
-    isExportingImage ||
-    isExportingJson ||
-    isExportingMarkdown ||
-    isPrinting;
-  const loadingText =
-    isExporting || isExportingLongPage || isExportingImage || isPrinting
-      ? t("button.exporting")
+  const isLoading = isExportingJson || isPrinting;
+  const loadingText = isPrinting
+    ? t("button.exporting")
     : isExportingJson
       ? t("button.exportingJson")
-      : isExportingMarkdown
-        ? t("button.exportingMarkdown")
-        : "";
+      : "";
 
   return (
     <Dialog open={isOpen} onOpenChange={(val) => {
@@ -258,36 +170,6 @@ const PdfExport = ({ children }: { children?: React.ReactNode }) => {
         <div className="p-8 bg-background">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5 relative">
             <ExportCard
-              icon={PdfGlassIcon}
-              title={t("button.exportPdf")}
-              description={t("modal.pdfDesc")}
-              isLoading={isExporting}
-              isDisabled={isLoading}
-              onClick={handleExport}
-              bgGradientClass="from-rose-500/10 dark:from-rose-500/20"
-              hoverBorderClass="hover:border-rose-500/40 hover:ring-1 hover:ring-rose-500/20"
-            />
-            <ExportCard
-              icon={PdfGlassIcon}
-              title={t("button.exportLongPagePdf")}
-              description={t("modal.longPagePdfDesc")}
-              isLoading={isExportingLongPage}
-              isDisabled={isLoading}
-              onClick={handleLongPageExport}
-              bgGradientClass="from-violet-500/10 dark:from-violet-500/20"
-              hoverBorderClass="hover:border-violet-500/40 hover:ring-1 hover:ring-violet-500/20"
-            />
-            <ExportCard
-              icon={ImageGlassIcon}
-              title={t("button.exportLongPageImage")}
-              description={t("modal.longPageImageDesc")}
-              isLoading={isExportingImage}
-              isDisabled={isLoading}
-              onClick={handleLongPageImageExport}
-              bgGradientClass="from-teal-500/10 dark:from-teal-500/20"
-              hoverBorderClass="hover:border-teal-500/40 hover:ring-1 hover:ring-teal-500/20"
-            />
-            <ExportCard
               icon={PrintGlassIcon}
               title={t("button.print")}
               description={t("modal.printDesc")}
@@ -306,16 +188,6 @@ const PdfExport = ({ children }: { children?: React.ReactNode }) => {
               onClick={handleJsonExport}
               bgGradientClass="from-amber-500/10 dark:from-amber-500/20"
               hoverBorderClass="hover:border-amber-500/40 hover:ring-1 hover:ring-amber-500/20"
-            />
-            <ExportCard
-              icon={MarkdownGlassIcon}
-              title={t("button.exportMarkdown")}
-              description={t("modal.markdownDesc")}
-              isLoading={isExportingMarkdown}
-              isDisabled={isLoading}
-              onClick={handleMarkdownExport}
-              bgGradientClass="from-indigo-500/10 dark:from-indigo-500/20"
-              hoverBorderClass="hover:border-indigo-500/40 hover:ring-1 hover:ring-indigo-500/20"
             />
           </div>
 

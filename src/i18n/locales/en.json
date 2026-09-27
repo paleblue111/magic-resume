@@ -88,7 +88,7 @@
         },
         {
           "question": "What export formats are supported?",
-          "answer": "We currently support PDF export, PNG long image export, browser print, JSON config export, and Markdown export. PDF is best for formal applications and archiving, while PNG long image is useful for mobile previews, portfolio display, or image-upload workflows."
+          "answer": "We currently support two local export methods: system print Save as PDF, and JSON config backup. Resume content is never uploaded to an external server during export."
         },
         {
           "question": "How can I sync across devices?",
@@ -399,35 +399,20 @@
     "modal": {
       "title": "Export Resume",
       "subtitle": "Select the format you want to export your resume",
-      "pdfDesc": "High-precision rendering with 100% format accuracy. Recommended for job applications.",
-      "longPagePdfDesc": "Renders the entire resume as an image in a custom-height, single-page PDF. Best for online preview and sharing; not recommended for printing, text selection, or ATS parsing.",
-      "longPageImageDesc": "Exports the entire resume as a single tall PNG. Best for mobile preview, portfolios, and image uploads; not recommended for formal applications or printing.",
-      "printDesc": "Save via system print dialog. Use as a fallback or for custom margins.",
+      "printDesc": "Use the system print dialog and choose Save as PDF. Fully local — good for applications and printing.",
       "jsonDesc": "Export your resume data as JSON to backup or transfer between devices.",
-      "markdownDesc": "Convert to plain Markdown text for easy sharing with AI models.",
-      "privacyNotice": "Magic Resume promise never to collect, upload, or store any of your resume data. Your privacy is fully protected."
+      "privacyNotice": "Export is fully local: PDF via system print, JSON via browser download. Resume content is never uploaded to an external server."
     },
     "button": {
       "export": "Export",
-      "exportPdf": "Export PDF (Server)",
-      "exportLongPagePdf": "PDF (Long Page)",
-      "exportLongPageImage": "PNG (Long Image)",
-      "exportJson": "Export JSON Config",
-      "exportMarkdown": "Export Markdown",
+      "exportJson": "JSON Config",
       "exporting": "Exporting...",
       "exportingJson": "Exporting...",
-      "exportingMarkdown": "Exporting...",
-      "print": "Browser Print"
+      "print": "PDF (Backup)"
     },
     "toast": {
-      "success": "PDF exported successfully",
-      "error": "PDF export failed",
-      "imageSuccess": "PNG long image exported successfully",
-      "imageError": "PNG long image export failed",
       "jsonSuccess": "Configuration exported successfully",
-      "jsonError": "Configuration export failed",
-      "markdownSuccess": "Markdown exported successfully",
-      "markdownError": "Markdown export failed"
+      "jsonError": "Configuration export failed"
     }
   },
   "previewDock": {
@@ -962,11 +947,11 @@
       },
       "export-failure": {
         "question": "What if export fails or style is broken?",
-        "answer": "1. We recommend using Google Chrome (https://www.google.cn/intl/zh-CN/chrome/) for best compatibility.\n2. If it still fails, try in 'Incognito Mode' to exclude extension interference.\n3. Alternatively, click 'PDF (Backup)' in the export menu and select 'Save as PDF' in the print dialog."
+        "answer": "1. We recommend using Google Chrome (https://www.google.cn/intl/zh-CN/chrome/) for best compatibility.\n2. If it still fails, try in 'Incognito Mode' to exclude extension interference.\n3. Open Export, choose PDF (Backup), and select Save as PDF in the print dialog."
       },
       "export-methods": {
         "question": "Which export format should I use?",
-        "answer": "• PDF: Uses the backend service for high-precision rendering. Recommended for formal applications, printing, and archiving.\n\n• PDF (Long Page): Renders the resume as an image in a custom-height, single-page PDF. Best for online preview and sharing; not recommended for printing, text selection, or ATS parsing.\n\n• PNG (Long Image): Exports the resume as one tall image. Best for mobile preview, portfolios, and image-upload workflows.\n\n• PDF (Backup): Uses the browser's print dialog to save a PDF. Use it when the primary export service is unavailable or when you need to adjust print margins manually.\n\n• JSON Config: Exports a resume data backup for restoration or migration.\n\n• Markdown: Exports plain text for use in other tools."
+        "answer": "• PDF (Backup): Uses the system print dialog — choose Save as PDF. Fully local; recommended for applications, printing, and archiving.\n\n• JSON Config: Exports a resume data backup for restoration or migration."
       },
       "drag-and-drop": {
         "question": "How do I drag and drop to reorder modules?",
