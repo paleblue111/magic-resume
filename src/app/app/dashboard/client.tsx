@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { IconResumes, IconTemplates, IconSettings } from "@/components/shared/icons/SidebarIcons";
+import { IconResumes, IconTemplates } from "@/components/shared/icons/SidebarIcons";
 import { usePathname, useRouter } from "@/lib/navigation";
 import {
   Sidebar,
@@ -21,7 +21,7 @@ import {
   TooltipTrigger
 } from "@/components/ui/tooltip";
 import Logo from "@/components/shared/Logo";
-import { useLocale, useTranslations } from "@/i18n/compat/client";
+import { useTranslations } from "@/i18n/compat/client";
 import { AccessCodeGate } from "@/components/space/AccessCodeGate";
 
 interface MenuItem {
@@ -45,17 +45,10 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
       url: "/app/dashboard/templates",
       icon: IconTemplates,
     },
-    {
-      title: t("sidebar.settings"),
-      url: "/app/dashboard/settings",
-      icon: IconSettings,
-    },
-
   ];
 
   const router = useRouter();
   const pathname = usePathname();
-  const locale = useLocale();
   const [open, setOpen] = useState(true);
   const [collapsible, setCollapsible] = useState<"offcanvas" | "icon" | "none">(
     "icon"
@@ -85,7 +78,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
           className="border-r border-border/40 bg-card/50 backdrop-blur-xl"
         >
           <SidebarHeader className="h-16 flex items-center justify-center border-b border-border/40">
-            <div className="w-full cursor-pointer justify-center flex items-center" onClick={() => router.push(`/${locale}`)}
+            <div className="w-full cursor-pointer justify-center flex items-center" onClick={() => router.push("/app/dashboard/resumes")}
             >
               <Logo
                 className=" hover:opacity-80 transition-opacity"
