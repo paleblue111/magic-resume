@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect } from "react";
 import WorkbenchPage from "@/app/app/workbench/[id]/page";
 import { useResumeStore } from "@/store/useResumeStore";
+import { AccessCodeGate } from "@/components/space/AccessCodeGate";
 
 export const Route = createFileRoute("/app/workbench/$id")({
   head: () => ({
@@ -19,5 +20,9 @@ function WorkbenchRoutePage() {
     setActiveResume(id);
   }, [id, setActiveResume]);
 
-  return <WorkbenchPage />;
+  return (
+    <AccessCodeGate>
+      <WorkbenchPage />
+    </AccessCodeGate>
+  );
 }

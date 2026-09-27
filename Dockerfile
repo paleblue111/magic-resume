@@ -26,6 +26,8 @@ COPY --from=builder /app/package.json ./package.json
 COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/server.mjs ./server.mjs
 
+RUN mkdir -p /app/data && chown nodeapp:nodejs /app/data
+
 USER nodeapp
 
 EXPOSE 3000

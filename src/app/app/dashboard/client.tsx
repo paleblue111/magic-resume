@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { IconResumes, IconTemplates, IconSettings, IconAI } from "@/components/shared/icons/SidebarIcons";
+import { IconResumes, IconTemplates, IconSettings } from "@/components/shared/icons/SidebarIcons";
 import { usePathname, useRouter } from "@/lib/navigation";
 import {
   Sidebar,
@@ -22,6 +22,7 @@ import {
 } from "@/components/ui/tooltip";
 import Logo from "@/components/shared/Logo";
 import { useLocale, useTranslations } from "@/i18n/compat/client";
+import { AccessCodeGate } from "@/components/space/AccessCodeGate";
 
 interface MenuItem {
   title: string;
@@ -43,11 +44,6 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
       title: t("sidebar.templates"),
       url: "/app/dashboard/templates",
       icon: IconTemplates,
-    },
-    {
-      title: t("sidebar.ai"),
-      url: "/app/dashboard/ai",
-      icon: IconAI,
     },
     {
       title: t("sidebar.settings"),
@@ -81,6 +77,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   };
 
   return (
+    <AccessCodeGate>
     <div className="flex h-screen bg-background">
       <SidebarProvider open={open} onOpenChange={setOpen}>
         <Sidebar
@@ -176,6 +173,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
         </main>
       </SidebarProvider>
     </div>
+    </AccessCodeGate>
   );
 };
 

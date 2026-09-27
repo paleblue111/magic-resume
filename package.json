@@ -6,8 +6,6 @@
   "packageManager": "pnpm@10.3.0",
   "scripts": {
     "dev": "vite dev",
-    "test:ai": "tsx --test tests/*.test.ts",
-    "test:resume-import": "tsx --test tests/resume-import.test.ts",
     "test:preview": "node --test tests/preview.browser.mjs",
     "test:font-size": "tsx tests/font-size.browser.ts",
     "test:mobile": "tsx --test tests/mobile-workbench.browser.ts",
@@ -19,7 +17,6 @@
     "install:playwright": "playwright install chromium"
   },
   "dependencies": {
-    "@google/generative-ai": "^0.24.1",
     "@heroui/checkbox": "^2.3.30",
     "@heroui/date-input": "^2.3.30",
     "@heroui/react": "^2.8.8",
@@ -82,7 +79,6 @@
     "react-resizable-panels": "^2.0.20",
     "sharp": "^0.33.5",
     "sonner": "^1.7.1",
-    "streamdown": "^2.3.0",
     "tailwind-merge": "^2.6.0",
     "tailwindcss-animate": "^1.0.7",
     "turndown": "^7.2.2",
@@ -112,5 +108,16 @@
     "vite": "^7.3.1",
     "vite-tsconfig-paths": "^6.1.1",
     "wrangler": "^4.19.1"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild",
+      "sharp",
+      "@parcel/watcher",
+      "workerd",
+      "puppeteer",
+      "core-js",
+      "@heroui/shared-utils"
+    ]
   }
 }

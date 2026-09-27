@@ -1,7 +1,7 @@
 {
   "common": {
     "title": "Magic Resume",
-    "subtitle": "AI Driven Resume Editor",
+    "subtitle": "Simple Resume Editor",
     "description": "Magic Resume is an open source resume editor, free, privacy-first. No registration required, all data stored locally, support data backup and export, ensuring your resume data is always available.",
     "dashboard": "Dashboard",
     "edit": "Edit",
@@ -116,7 +116,7 @@
       "myResume": "My Resumes",
       "create": "Create Resume",
       "newResume": "New Resume",
-      "newResumeDescription": "Create a new resume to get started.",
+      "newResumeDescription": "One-click create with the default template",
       "import": "Import Resume",
       "untitled": "Untitled Resume",
       "importSuccess": "Configuration imported successfully",
@@ -163,7 +163,8 @@
           "truncatedOutput": "Model output was truncated. Reduce the page count and retry. No resume was created.",
           "refused": "The model declined this content. Check the file or use another model.",
           "visionTestFailed": "The test image was not read correctly. Verify image input support for this model and endpoint."
-        }
+        },
+        "jsonOnlyHint": "JSON resume files exported from this app only."
       },
       "notice": {
         "title": "Attention",
@@ -972,5 +973,21 @@
         "answer": "In the 'Layout' settings of the left edit panel, hover your cursor over the 'Drag Handle' (usually represented by a six-dot icon) on the left side of the module card. Click and hold the left mouse button to drag the module up or down to reorder the sections of your entire resume."
       }
     }
+  },
+  "space": {
+    "title": "Enter access code",
+    "description": "Enter an access code to open its resume space. The code acts like a shared folder name: the correct code loads that space’s resumes; wrong or empty means no access.",
+    "codeLabel": "Access code",
+    "codePlaceholder": "e.g. team-alpha-2026",
+    "codeHint": "Letters, numbers, and . _ - only; 3–64 chars; no path characters.",
+    "enter": "Enter space",
+    "entering": "Entering…",
+    "enterSuccess": "Entered resume space",
+    "enterFailed": "Failed to enter, please try again",
+    "invalidCode": "Invalid access code",
+    "currentSpace": "Current space: {code}",
+    "leave": "Leave / Switch",
+    "leaveSuccess": "Left the space",
+    "leaveFailed": "Failed to leave"
   }
 }

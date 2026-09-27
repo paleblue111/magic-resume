@@ -43,3 +43,6 @@ src/routeTree.gen.ts
 .history
 .agent
 .tanstack
+
+# Access-code resume storage
+/data

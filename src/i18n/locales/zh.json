@@ -1,7 +1,7 @@
 {
   "common": {
     "title": "魔方简历",
-    "subtitle": "AI 驱动简历编辑器",
+    "subtitle": "简洁的简历编辑器",
     "description": "魔方简历是一款开源的简历编辑器，免费，隐私优先。无需注册登录，数据完全存储在本地，支持数据导出备份，确保您的简历数据随时可用。",
     "dashboard": "仪表盘",
     "edit": "编辑",
@@ -117,7 +117,7 @@
       "myResume": "我的简历",
       "create": "新建简历",
       "newResume": "新建简历",
-      "newResumeDescription": "创建一个新简历以开始。",
+      "newResumeDescription": "使用默认模板一键创建并进入编辑",
       "import": "导入简历",
       "untitled": "未命名简历",
       "importSuccess": "配置导入成功",
@@ -164,7 +164,8 @@
           "truncatedOutput": "模型输出未完成，请减少页数后重试；未创建简历",
           "refused": "模型拒绝处理该内容，请检查文件或更换模型",
           "visionTestFailed": "未能正确识别测试图片，请确认模型和接口支持图片输入"
-        }
+        },
+        "jsonOnlyHint": "仅支持导入本应用导出的 JSON 简历文件。"
       },
       "notice": {
         "title": "注意",
@@ -974,5 +975,21 @@
         "answer": "在左侧编辑面板的“布局”设置中，将光标悬停在模块卡片左侧的「拖拽手柄」（通常表现为六个点状图标）上，按住鼠标左键即可上下拖拽模块以重新排序整个简历的章节。"
       }
     }
+  },
+  "space": {
+    "title": "输入访问码",
+    "description": "输入访问码即可进入对应的简历空间。访问码相当于共享文件夹名称，正确即可加载该空间下的简历；错误或为空则无法访问。",
+    "codeLabel": "访问码",
+    "codePlaceholder": "例如：team-alpha-2026",
+    "codeHint": "仅允许字母、数字以及 . _ -，长度 3–64，不能包含路径字符。",
+    "enter": "进入空间",
+    "entering": "正在进入…",
+    "enterSuccess": "已进入简历空间",
+    "enterFailed": "进入失败，请稍后重试",
+    "invalidCode": "访问码无效，请检查后重试",
+    "currentSpace": "当前空间：{code}",
+    "leave": "退出 / 切换",
+    "leaveSuccess": "已退出空间",
+    "leaveFailed": "退出失败"
   }
 }

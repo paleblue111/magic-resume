@@ -3,7 +3,6 @@ import {
   Edit2,
   PanelRightClose,
   PanelRightOpen,
-  SpellCheck2,
   Home,
   Copy,
   Download,
@@ -30,10 +29,7 @@ import {
 import TemplateSheet from "@/components/shared/TemplateSheet";
 import { GITHUB_REPO_URL, PDF_EXPORT_CONFIG } from "@/config";
 import { cn } from "@/lib/utils";
-import { useGrammarCheck } from "@/hooks/useGrammarCheck";
-import { AI_MODEL_CONFIGS } from "@/config/ai";
 import { useResumeStore } from "@/store/useResumeStore";
-import { useAIConfiguration } from "@/hooks/useAIConfiguration";
 import { FAQDialog } from "./FAQDialog";
 import PdfExport from "@/components/shared/PdfExport";
 
@@ -91,40 +87,9 @@ const PreviewDock = ({
 }: PreviewDockProps) => {
   const router = useRouter();
   const t = useTranslations("previewDock");
-  const { checkGrammar, isChecking } = useGrammarCheck();
-
   const { duplicateResume, setActiveResume, activeResumeId, activeResume, updateGlobalSettings } = useResumeStore();
   const { globalSettings = {} } = activeResume || {};
   const pageBreakLinesVisible = globalSettings?.pageBreakLinesVisible !== false;
-
-  const { checkConfiguration } = useAIConfiguration();
-
-  // ... (keep other hooks)
-
-  const handleGrammarCheck = useCallback(async () => {
-    if (!checkConfiguration()) {
-      return;
-    }
-
-    try {
-      const previewContent =
-        resumeContentRef.current || document.getElementById("resume-preview");
-      if (!previewContent) {
-        toast.error(t("grammarCheck.errorToast"));
-        return;
-      }
-
-      const text = previewContent.innerText?.trim();
-      if (!text) {
-        toast.error(t("grammarCheck.errorToast"));
-        return;
-      }
-
-      await checkGrammar(text);
-    } catch (error) {
-      toast.error(t("grammarCheck.errorToast"));
-    }
-  }, [resumeContentRef, checkConfiguration, checkGrammar, t]);
 
   const handleGoGitHub = () => {
     window.open(GITHUB_REPO_URL, "_blank");
@@ -169,32 +134,6 @@ const PreviewDock = ({
                   </TooltipTrigger>
                   <TooltipContent side="left" sideOffset={10}>
                     <p>{t("switchTemplate")}</p>
-                  </TooltipContent>
-                </Tooltip>
-              </DockIcon>
-              <DockIcon>
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <div
-                      className={cn(
-                        "flex cursor-pointer h-7 w-7 items-center justify-center rounded-lg",
-                        "hover:bg-gray-100/50 dark:hover:bg-neutral-800/50",
-                        "transition-all duration-200",
-                        isChecking && "animate-pulse"
-                      )}
-                      onClick={handleGrammarCheck}
-                    >
-                      <SpellCheck2
-                        className={cn("h-4 w-4", isChecking && "animate-spin")}
-                      />
-                    </div>
-                  </TooltipTrigger>
-                  <TooltipContent side="left" sideOffset={10}>
-                    <p>
-                      {isChecking
-                        ? t("grammarCheck.checking")
-                        : t("grammarCheck.idle")}
-                    </p>
                   </TooltipContent>
                 </Tooltip>
               </DockIcon>
