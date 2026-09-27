@@ -1,12 +1,19 @@
 services:
-  web:
+  app:
     build:
       context: .
       dockerfile: Dockerfile
     ports:
       - "3000:3000"
     environment:
-      - NODE_ENV=production
+      NODE_ENV: production
+      PORT: "3000"
+      HOSTNAME: "0.0.0.0"
+      # HTTPS 反代时取消注释，使 space_code Cookie 带 Secure 标记：
+      # COOKIE_SECURE: "1"
     volumes:
-      - ./data:/app/data
-    restart: always
+      - magic-resume-data:/app/data
+    restart: unless-stopped
+
+volumes:
+  magic-resume-data:
