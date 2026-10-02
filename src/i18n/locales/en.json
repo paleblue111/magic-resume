@@ -1,8 +1,8 @@
 {
   "common": {
-    "title": "Magic Resume",
+    "title": "Resume",
     "subtitle": "Simple Resume Editor",
-    "description": "Magic Resume is an open source resume editor, free, privacy-first. No registration required, all data stored locally, support data backup and export, ensuring your resume data is always available.",
+    "description": "Resume is an open source resume editor, free, privacy-first. No registration required, all data stored locally, support data backup and export, ensuring your resume data is always available.",
     "dashboard": "Dashboard",
     "edit": "Edit",
     "delete": "Delete",
@@ -17,7 +17,7 @@
   },
   "home": {
     "header": {
-      "title": "Magic Resume",
+      "title": "Resume",
       "startButton": "Get Started",
       "features": "Features",
       "pricing": "Pricing",
@@ -103,7 +103,7 @@
   },
   "dashboard": {
     "sidebar": {
-      "appName": "Magic Resume",
+      "appName": "Resume",
       "resumes": "Resumes",
       "settings": "Settings",
       "templates": "Templates",
@@ -939,7 +939,7 @@
   },
   "faqDialog": {
     "title": "Frequently Asked Questions (FAQ)",
-    "description": "Common tips and solutions for the Magic Resume workbench.",
+    "description": "Common tips and solutions for the Resume workbench.",
     "items": {
       "browser-compatibility": {
         "question": "Which browser is recommended?",

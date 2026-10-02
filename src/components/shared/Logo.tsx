@@ -1,5 +1,5 @@
 import React from "react";
-import Image from "@/lib/image";
+import { cn } from "@/lib/utils";
 
 interface LogoProps {
   size?: number;
@@ -7,21 +7,27 @@ interface LogoProps {
   onClick?: () => void;
 }
 
+/** Plain text mark — product name shown as "Resume". */
 const Logo: React.FC<LogoProps> = ({
   size = 100,
   className = "",
   onClick,
 }) => {
+  const fontSize = Math.max(14, Math.round(size * 0.42));
+
   return (
-    <Image
-      src="/logo.svg"
-      alt="Magic Resume Logo"
-      width={size}
-      height={size}
-      className={className}
+    <span
+      role="img"
+      aria-label="Resume"
       onClick={onClick}
-      priority={size >= 64}
-    />
+      className={cn(
+        "inline-flex items-center font-bold tracking-tight select-none",
+        className
+      )}
+      style={{ fontSize, lineHeight: 1, height: size }}
+    >
+      Resume
+    </span>
   );
 };
 

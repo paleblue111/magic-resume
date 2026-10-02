@@ -81,14 +81,9 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
             <div className="w-full cursor-pointer justify-center flex items-center" onClick={() => router.push("/app/dashboard/resumes")}
             >
               <Logo
-                className=" hover:opacity-80 transition-opacity"
-                size={48}
+                className="hover:opacity-80 transition-opacity"
+                size={open ? 40 : 28}
               />
-              {open && (
-                <span className="font-bold text-lg tracking-tight">
-                  {t("sidebar.appName")}
-                </span>
-              )}
             </div>
           </SidebarHeader>
           <SidebarContent className="px-3 py-4">

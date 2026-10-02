@@ -1,5 +1,6 @@
 import { cloneResumeForExport } from "@/utils/resumeLayout";
 import { getFontFaceCss, normalizeFontFamily } from "@/utils/fonts";
+import { getExportFileBaseName } from "@/utils/export";
 
 /**
  * Browser print / "PDF(备份)" export.
@@ -67,7 +68,7 @@ export const exportResumeToBrowserPrint = async (
       <!DOCTYPE html>
       <html>
         <head>
-          <title>Print Resume</title>
+          <title>${getExportFileBaseName()}</title>
           <style>
             ${fontFaceStyles}
             ${copiedStyles}

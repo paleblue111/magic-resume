@@ -1,8 +1,8 @@
 {
   "common": {
-    "title": "魔方简历",
+    "title": "Resume",
     "subtitle": "简洁的简历编辑器",
-    "description": "魔方简历是一款开源的简历编辑器，免费，隐私优先。无需注册登录，数据完全存储在本地，支持数据导出备份，确保您的简历数据随时可用。",
+    "description": "Resume 是一款开源的简历编辑器，免费，隐私优先。无需注册登录，数据完全存储在本地，支持数据导出备份，确保您的简历数据随时可用。",
     "dashboard": "仪表盘",
     "edit": "编辑",
     "delete": "删除",
@@ -17,7 +17,7 @@
   },
   "home": {
     "header": {
-      "title": "魔方简历",
+      "title": "Resume",
       "startButton": "开始使用",
       "features": "功能特点",
       "pricing": "定价",
@@ -104,7 +104,7 @@
   },
   "dashboard": {
     "sidebar": {
-      "appName": "魔方简历",
+      "appName": "Resume",
       "resumes": "我的简历",
       "settings": "通用设置",
       "templates": "简历模板",
@@ -941,7 +941,7 @@
   },
   "faqDialog": {
     "title": "常见问题 (FAQ)",
-    "description": "关于 Magic Resume 工作台的一些常用技巧和解答。",
+    "description": "关于 Resume 工作台的一些常用技巧和解答。",
     "items": {
       "browser-compatibility": {
         "question": "推荐使用什么浏览器？",

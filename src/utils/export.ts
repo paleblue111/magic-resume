@@ -1,15 +1,11 @@
 import { toast } from "sonner";
 import { ResumeData } from "@/types/resume";
 
-const INVALID_FILE_NAME_CHAR_REGEX = /[\\/:*?"<>|]/g;
-
-const getSafeFileName = (title?: string) => {
-  const normalized = (title || "resume")
-    .trim()
-    .replace(INVALID_FILE_NAME_CHAR_REGEX, "_")
-    .replace(/\s+/g, " ");
-
-  return normalized || "resume";
+/** Local-date export basename, e.g. Sept 1 → resume-0901 */
+export const getExportFileBaseName = (date: Date = new Date()) => {
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  return `resume-${month}${day}`;
 };
 
 const downloadBlob = (blob: Blob, fileName: string) => {
@@ -28,6 +24,7 @@ const downloadTextFile = (content: string, fileName: string, mimeType: string) =
 
 interface ExportResumeFileOptions {
   resume?: ResumeData | null;
+  /** @deprecated Filename is always resume-MMDD; kept for call-site compatibility */
   title?: string;
   onStart?: () => void;
   onEnd?: () => void;
@@ -37,7 +34,6 @@ interface ExportResumeFileOptions {
 
 export const exportResumeAsJson = ({
   resume,
-  title,
   onStart,
   onEnd,
   successMessage,
@@ -51,7 +47,7 @@ export const exportResumeAsJson = ({
     }
 
     const json = JSON.stringify(resume, null, 2);
-    const fileName = `${getSafeFileName(title || resume.title)}.json`;
+    const fileName = `${getExportFileBaseName()}.json`;
     downloadTextFile(json, fileName, "application/json;charset=utf-8");
     if (successMessage) toast.success(successMessage);
   } catch (error) {
