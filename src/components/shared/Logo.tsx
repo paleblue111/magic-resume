@@ -2,29 +2,29 @@ import React from "react";
 import { cn } from "@/lib/utils";
 
 interface LogoProps {
+  /** Optional font size in px. Prefer className for layout. */
   size?: number;
   className?: string;
   onClick?: () => void;
 }
 
-/** Plain text mark — product name shown as "Resume". */
+/** Wordmark. The product name is the word Resume — no boxed graphic. */
 const Logo: React.FC<LogoProps> = ({
-  size = 100,
+  size,
   className = "",
   onClick,
 }) => {
-  const fontSize = Math.max(14, Math.round(size * 0.42));
-
   return (
     <span
       role="img"
       aria-label="Resume"
       onClick={onClick}
       className={cn(
-        "inline-flex items-center font-bold tracking-tight select-none",
+        "inline-flex items-center select-none leading-none",
+        "text-[15px] font-semibold tracking-[-0.03em] text-sidebar-foreground",
         className
       )}
-      style={{ fontSize, lineHeight: 1, height: size }}
+      style={size ? { fontSize: size } : undefined}
     >
       Resume
     </span>

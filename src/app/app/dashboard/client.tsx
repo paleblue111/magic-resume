@@ -77,13 +77,18 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
           collapsible={collapsible}
           className="border-r border-border/40 bg-card/50 backdrop-blur-xl"
         >
-          <SidebarHeader className="h-16 flex items-center justify-center border-b border-border/40">
-            <div className="w-full cursor-pointer justify-center flex items-center" onClick={() => router.push("/app/dashboard/resumes")}
+          <SidebarHeader className="px-3 pt-5 pb-1">
+            <div
+              className="flex h-10 w-full cursor-pointer items-center px-4 group-data-[collapsible=icon]:group-data-[state=collapsed]:justify-center group-data-[collapsible=icon]:group-data-[state=collapsed]:px-0"
+              onClick={() => router.push("/app/dashboard/resumes")}
             >
-              <Logo
-                className="hover:opacity-80 transition-opacity"
-                size={open ? 40 : 28}
-              />
+              <Logo className="transition-opacity hover:opacity-80 group-data-[collapsible=icon]:group-data-[state=collapsed]:hidden" />
+              <span
+                aria-hidden
+                className="hidden w-6 items-center justify-center text-[15px] font-semibold tracking-[-0.03em] text-sidebar-foreground group-data-[collapsible=icon]:group-data-[state=collapsed]:inline-flex"
+              >
+                R
+              </span>
             </div>
           </SidebarHeader>
           <SidebarContent className="px-3 py-4">

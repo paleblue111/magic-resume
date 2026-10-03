@@ -64,11 +64,13 @@ export const exportResumeToBrowserPrint = async (
       })
       .join("\n");
 
+    const exportBaseName = getExportFileBaseName();
+
     const htmlContent = `
       <!DOCTYPE html>
       <html>
         <head>
-          <title>${getExportFileBaseName()}</title>
+          <title>${exportBaseName}</title>
           <style>
             ${fontFaceStyles}
             ${copiedStyles}
@@ -139,6 +141,24 @@ export const exportResumeToBrowserPrint = async (
 
     iframeWindow.document.write(htmlContent);
     iframeWindow.document.close();
+    // document.write's <title> is not what Chrome's Save as PDF reads.
+    // The suggested PDF name comes from the top-level document.title, and
+    // only while the print dialog is open. Set both and hold them.
+    iframeWindow.document.title = exportBaseName;
+
+    const previousTitle = document.title;
+    let cleanedUp = false;
+    let titleObserver: MutationObserver | null = null;
+    const cleanupPrintFrame = () => {
+      if (cleanedUp) return;
+      cleanedUp = true;
+      titleObserver?.disconnect();
+      titleObserver = null;
+      document.title = previousTitle;
+      if (document.body.contains(printFrame)) {
+        document.body.removeChild(printFrame);
+      }
+    };
 
     const printWhenReady = async () => {
       try {
@@ -170,20 +190,50 @@ export const exportResumeToBrowserPrint = async (
           });
         });
 
+        document.title = exportBaseName;
+        doc.title = exportBaseName;
+
+        // Chrome's Save as PDF name is the top-level document.title, read
+        // asynchronously after print() — not the iframe <title>. Next/React
+        // can also write the <title> node back. Hold the name until the
+        // dialog closes, and do not remove the iframe before then (doing so
+        // makes Chrome fall back to the page title).
+        const enforceTitle = () => {
+          if (document.title !== exportBaseName) {
+            document.title = exportBaseName;
+          }
+        };
+        titleObserver = new MutationObserver(enforceTitle);
+        titleObserver.observe(document.head, {
+          childList: true,
+          subtree: true,
+          characterData: true
+        });
+
+        const startedAt = performance.now();
+        const finish = () => {
+          // Some browsers emit afterprint as the dialog opens. Ignore that
+          // and keep the title until a later afterprint (dialog close).
+          if (performance.now() - startedAt < 500) return;
+          if (cleanedUp) return;
+          iframeWindow.removeEventListener("afterprint", finish);
+          window.removeEventListener("afterprint", finish);
+          window.removeEventListener("pointerdown", finish, true);
+          cleanupPrintFrame();
+        };
+
+        iframeWindow.addEventListener("afterprint", finish);
+        window.addEventListener("afterprint", finish);
+        // Dialog UI doesn't hit the page; the next click means it closed
+        // and afterprint never arrived.
+        window.addEventListener("pointerdown", finish, true);
+        window.setTimeout(finish, 120_000);
+
         iframeWindow.focus();
         iframeWindow.print();
-
-        // 打印完成后清理iframe
-        setTimeout(() => {
-          if (document.body.contains(printFrame)) {
-            document.body.removeChild(printFrame);
-          }
-        }, 1000);
       } catch (error) {
         console.error("Error print:", error);
-        if (document.body.contains(printFrame)) {
-          document.body.removeChild(printFrame);
-        }
+        cleanupPrintFrame();
       }
     };
 
